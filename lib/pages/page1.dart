@@ -1,6 +1,6 @@
 
-
 import 'package:flutter/material.dart';
+import 'package:feedback_app/services/ratingsclass.dart';
 
 class page1 extends StatefulWidget {
   const page1({Key key}) : super(key: key);
@@ -9,12 +9,6 @@ class page1 extends StatefulWidget {
   _page1State createState() => _page1State();
 }
 
-class ratings{
-
- final double rating1;
-  ratings(this.rating1);
-
-}
 
 class _page1State extends State<page1> {
 
@@ -26,19 +20,24 @@ class _page1State extends State<page1> {
 
 
 
-   ratings instance = ratings(rating1 = (rating11*4+1) );
+   Ratings instance = Ratings( ratings1: rating1*4+1, ratings2: 0, ratings3: 0, ratings4: 0,ratings5: 0,ratings6: 0 );
    Navigator.pushReplacementNamed(context, '/2',arguments:
-     instance.rating1
+     {'ratings1': instance.ratings1,'ratings2':instance.ratings2,
+       'ratings3':instance.ratings3,'ratings4':instance.ratings4,
+      'ratings5' :instance.ratings5,'ratings6':instance.ratings6}
    );
+
 
   }
 
-  double nowrating = 0;
+  Map nowrating = {};
+
 
   @override
   Widget build(BuildContext context) {
 
     nowrating = ModalRoute.of(context).settings.arguments;
+    print(nowrating);
 
 
 

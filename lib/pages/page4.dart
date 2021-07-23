@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:feedback_app/services/ratingsclass.dart';
 
 class page4 extends StatefulWidget {
   const page4({Key key}) : super(key: key);
@@ -7,39 +8,37 @@ class page4 extends StatefulWidget {
   _page4State createState() => _page4State();
 }
 
-class ratings{
-
-  final double rating4;
-  ratings(this.rating4);
-
-}
 
 class _page4State extends State<page4> {
   @override
 
   double rating4=0;
 
-  double nowrating = 0;
+  Map nowrating = {};
 
   Widget build(BuildContext context) {
 
     nowrating = ModalRoute.of(context).settings.arguments;
+    print(nowrating);
 
 
     void reverseratings () {
 
-      ratings instance = ratings(rating4 = nowrating);
-      Navigator.pushReplacementNamed(context, '/3',arguments:
-      instance.rating4
+      Ratings instance = Ratings(ratings4: 0.0, ratings1: nowrating['ratings1'],ratings2: nowrating['ratings2'],ratings3: 0.0,ratings5: 0,ratings6: 0);
+      Navigator.pushReplacementNamed(context, '/3',arguments: { 'ratings1': instance.ratings1
+        ,'ratings2':instance.ratings2,'ratings3':instance.ratings3,'ratings4':instance.ratings4,
+        'ratings5' :instance.ratings5,'ratings6':instance.ratings6}
+
       );
     }
 
     void changeratings () {
 
-      ratings instance = ratings(rating4 = (rating4*4+1)+(nowrating));
+      Ratings instance = Ratings(ratings4: rating4*4+1, ratings1: nowrating['ratings1'],ratings2: nowrating['ratings2'],ratings3: nowrating['ratings3'],ratings5: 0,ratings6: 0 );
 
-      Navigator.pushReplacementNamed(context, '/5',arguments:
-      instance.rating4
+      Navigator.pushReplacementNamed(context, '/5',arguments:{ 'ratings1': instance.ratings1
+        ,'ratings2':instance.ratings2,'ratings3':instance.ratings3,'ratings4':instance.ratings4,
+        'ratings5' :instance.ratings5,'ratings6':instance.ratings6}
       );
 
     }

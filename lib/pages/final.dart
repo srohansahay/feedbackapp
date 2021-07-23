@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:feedback_app/services/ratingsclass.dart';
+import 'package:emojis/emojis.dart';
 
 class finalpage extends StatefulWidget {
   const finalpage({Key key}) : super(key: key);
@@ -11,7 +13,8 @@ class finalpage extends StatefulWidget {
 
 class _finalpageState extends State<finalpage> {
 
-  double nowrating = 0;
+  Map nowrating = {};
+  double nowrating1 = 0.0;
 
 
 
@@ -22,25 +25,33 @@ class _finalpageState extends State<finalpage> {
 
 
     nowrating = ModalRoute.of(context).settings.arguments;
+    print(nowrating);
+    nowrating1 = nowrating['ratings1'] + nowrating['ratings2']+nowrating['ratings3']+nowrating['ratings4']+nowrating['ratings5']+nowrating['ratings6'];
+    print(nowrating1);
 
 
-    bool High = nowrating >= 21.0 && nowrating <= 30.0 ? true : false ;
+    bool High = nowrating1 >= 21.0 && nowrating1 <= 30.0 ? true : false ;
     print(High);
-    bool Medium = nowrating >= 11.0 && nowrating <= 20.0 ? true : false;
+    bool Medium = nowrating1 >= 11.0 && nowrating1 <= 20.0 ? true : false;
     print(Medium);
 
 
     Color fontcolor1 = Medium ? Colors.amber : Colors.red;
     Color fontcolor = High ? Colors.green : fontcolor1;
 
-    String feedback1 = Medium ? 'Hope we serve you better next time' : 'We are sorry for your inconvenience';
-    String feedback = High? 'We hope you come back next time' : feedback1;
+    String feedback1 = Medium ? 'Hope we serve you better next time ${Emojis.sadButRelievedFace}' : 'We are sorry for your inconvenience ${Emojis.faceScreamingInFear}';
+    String feedback = High? 'We hope you come back next time ${Emojis.smilingFace} ' : feedback1;
 
     void back () {
 
 
 
-      Navigator.pushReplacementNamed(context, '/1'
+       Ratings instance = Ratings( ratings1: 0.0, ratings2: 0, ratings3: 0, ratings4: 0,ratings5: 0,ratings6: 0 );
+
+      Navigator.pushReplacementNamed(context, '/1', arguments:
+      {'ratings1': instance.ratings1,'ratings2':instance.ratings2,
+        'ratings3':instance.ratings3,'ratings4':instance.ratings4,
+        'ratings5' :instance.ratings5,'ratings6':instance.ratings6}
       );
 
     }
@@ -77,7 +88,7 @@ class _finalpageState extends State<finalpage> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Text(
-                        '${nowrating}/30.0',
+                        '${nowrating1}/30.0',
                         style: TextStyle(
                           fontSize: 25.0,
                           color: Colors.blueAccent[400],

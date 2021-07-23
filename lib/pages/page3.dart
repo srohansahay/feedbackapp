@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'page2.dart';
+import 'package:feedback_app/services/ratingsclass.dart';
 
 class page3 extends StatefulWidget {
   const page3({Key key}) : super(key: key);
@@ -8,12 +9,7 @@ class page3 extends StatefulWidget {
   _page3State createState() => _page3State();
 }
 
-class ratings{
 
-  final double rating3;
-  ratings(this.rating3);
-
-}
 
 class _page3State extends State<page3> {
   @override
@@ -21,7 +17,7 @@ class _page3State extends State<page3> {
   double rating3=0;
   double rating31 =0;
 
-  double nowrating = 0;
+  Map nowrating = {};
 
 
 
@@ -37,26 +33,29 @@ class _page3State extends State<page3> {
 
 
 
-      ratings instance = ratings(rating3 = nowrating );
+      Ratings instance = Ratings(ratings3 : 0.0, ratings2: 0.0,ratings1: nowrating['ratings1'], ratings4: 0,ratings5: 0,ratings6: 0 );
 
 
       Navigator.pushReplacementNamed(context, '/2',arguments:
-      instance.rating3
+      {'ratings1': instance.ratings1
+          ,'ratings2':instance.ratings2,'ratings3':instance.ratings3,'ratings4':instance.ratings4,
+          'ratings5' :instance.ratings5,'ratings6':instance.ratings6}
 
       );
-      print(instance.rating3);
+      print(instance.ratings3);
     }
 
     void changeratings () {
 
 
 
-      ratings instance = ratings(rating3 = (rating31*4+1)+nowrating);
+      Ratings instance = Ratings(ratings3: rating3*4+1, ratings1: nowrating['ratings1'], ratings2: nowrating['ratings2'] , ratings4: 0,ratings5: 0,ratings6: 0 );
 
-      Navigator.pushReplacementNamed(context, '/4',arguments:
-      instance.rating3
+      Navigator.pushReplacementNamed(context, '/4',arguments: { 'ratings1': instance.ratings1
+        ,'ratings2':instance.ratings2,'ratings3':instance.ratings3,'ratings4':instance.ratings4,
+        'ratings5' :instance.ratings5,'ratings6':instance.ratings6}
       );
-      print(instance.rating3);
+
 
     }
 
